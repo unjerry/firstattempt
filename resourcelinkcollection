@@ -4,7 +4,33 @@ discretefouriertransform:
     https://b23.tv/FXbhmSo
     (reducible-YT)(the FFT for the fast list convolution)
 }
+listconvolution:
+{
+    
+}
 
+gitrelatedmaterial:
+{
 
+}
 
-
+algebrastructure:
+{
+    basic class:
+    {
+        complexmatrix(ring)
+        complexpolynomial(ring)
+        complexnumber(field)
+    }
+    upper structure:
+    {
+        group:
+        {
+            representation of the matrix
+        }
+        ring:
+        {
+            matrix representation
+        }
+    }
+}
