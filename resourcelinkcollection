@@ -6,7 +6,10 @@ discretefouriertransform:
 }
 listconvolution:
 {
-    
+    matrixconvolution:
+    {
+        split matrixconvolution to an listconvolution and use fastfouriertransformation
+    }
 }
 
 gitrelatedmaterial:
