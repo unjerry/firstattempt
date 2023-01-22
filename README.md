@@ -37,7 +37,7 @@ function explanation
 
 	identity tell $=$
 
-	=$$
+	$$
 	\begin{equation}
 	:(a,b)=\left\{
 	\begin{aligned}
