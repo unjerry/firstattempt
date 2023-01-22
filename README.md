@@ -14,41 +14,61 @@ $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \
 
 ## present version contain as follow
 
-### header file
+### mathtoolslibrary
 
 #### complexnumber
 
 function explanation
 1. provide a class realize the complexnumber field
-include:
-commutative binary operation $+$ 
-+$:(a,b)\rightarrow c=a+b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
-commutative binary operation $*$ 
-*$:(a,b)\rightarrow c=a\times b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
-binary operation ^ 
-^$:(a,b)\rightarrow c=a^b,\forall a,b,\in\mathbb{C}$
-identity tell $=$
-=$$
-\begin{equation}
-:(a,b)=\left\{
+	
+	include:
+
+    1.commutative binary operation $+$ 
+
+	+$:(a,b)\rightarrow c=a+b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
+
+	2.commutative binary operation $*$ 
+
+	*$:(a,b)\rightarrow c=a\times b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
+
+	3.binary operation ^ 
+
+	^$:(a,b)\rightarrow c=a^b,\forall a,b,\in\mathbb{C}$
+
+	identity tell $=$
+
+	=$$
+	\begin{equation}
+	:(a,b)=\left\{
 	\begin{aligned}
 	1 \quad a=b\\
 	0 \quad a\neq b\\
 	\end{aligned}
 	\right
 	.
-\end{equation}
-$$
+	\end{equation}
+	$$
+
 2. realize standard input output
+
 complex.output(FILE *f,int opt)
+
 ### mathtools
+
 #### discretefouriertransform
+
 funtcion explanation
 this piece of function takes a list of "complexnumber" a[N] as input & gives the a list b[N] of same length contains "complexnumber" as  output
 
 the rule of this function follows:
 a[i]=sum((b[k]/N)*zeta[i*k])(0<=k<=N-1)
 where zeta[i]=e^((2PI*Im/N)*i)
+
+### applianceprojects
+
+####splitwave
+
+a splitwave is a function takes a list of "complexnumber" a[N] as input and gives a list of list of "complexnumber" b[ceil(log2(N))][N] as output and the rule as follow
 
 
     
