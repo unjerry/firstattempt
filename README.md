@@ -25,15 +25,15 @@ function explanation
 
     1.commutative binary operation $+$ 
 
-	+$:(a,b)\rightarrow c=a+b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
+	$:(a,b)\rightarrow c=a+b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
 
 	2.commutative binary operation $*$ 
 
-	*$:(a,b)\rightarrow c=a\times b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
+	$:(a,b)\rightarrow c=a\times b,(a,b)=(b,a),\forall a,b,c\in\mathbb{C}$
 
 	3.binary operation ^ 
 
-	^$:(a,b)\rightarrow c=a^b,\forall a,b,\in\mathbb{C}$
+	$:(a,b)\rightarrow c=a^b,\forall a,b,\in\mathbb{C}$
 
 	identity tell $=$
 
