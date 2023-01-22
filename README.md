@@ -37,17 +37,8 @@ function explanation
 
 	identity tell $=$
 
-	$$
-	\begin{equation}
-	:(a,b)=\left\{
-	\begin{aligned}
-	1 \quad a=b\\
-	0 \quad a\neq b\\
-	\end{aligned}
-	\right
-	.
-	\end{equation}
-	$$
+	$$\begin{equation}(a,b)=\left\{\begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}$$
+
 
 2. realize standard input output
 
