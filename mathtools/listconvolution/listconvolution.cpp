@@ -24,7 +24,13 @@ complexmatrix listconvolution(complexmatrix a, complexmatrix b)
     }
     complexmatrix cc(N, 1);
     cc = fastfouriertransform(C, -1);
-    return cc;
+    long long NN = a.r + b.r - 1;
+    complexmatrix c(NN, 1);
+    for (int i = 1; i <= NN; i++)
+    {
+        c.dt[i][1] = cc.dt[i][1];
+    }
+    return c;
 }
 int main()
 {

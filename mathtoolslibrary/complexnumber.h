@@ -9,7 +9,7 @@ public:
     double Re;
     double Im;
     double r;     //[0,+infinity)
-    double theta; //[0,2PI)
+    double theta; //(-PI,PI]
     complexnumber();
     complexnumber(const long double x, const long double y, int opt);
     void print(int opt)
@@ -96,7 +96,11 @@ complexnumber operator*(const complexnumber &a, const complexnumber &b)
     complexnumber c;
     c.r = a.r * b.r;
     c.theta = a.theta + b.theta;
-    c.theta = c.theta - (floor(c.theta / (2 * PI)) * (2 * PI));
+    c.theta = c.theta - (ceil(c.theta / (2 * PI)) * (2 * PI)) + (2 * PI);
+    if (c.theta > PI)
+    {
+        c.theta = c.theta - (2 * PI);
+    }
     c.Re = c.r * cos(c.theta);
     c.Im = c.r * sin(c.theta);
     return c;
@@ -106,7 +110,11 @@ complexnumber operator/(const complexnumber &a, const complexnumber &b)
     complexnumber c;
     c.r = a.r / b.r;
     c.theta = a.theta - b.theta;
-    c.theta = c.theta - (floor(c.theta / (2 * PI)) * (2 * PI));
+    c.theta = c.theta - (ceil(c.theta / (2 * PI)) * (2 * PI)) + (2 * PI);
+    if (c.theta > PI)
+    {
+        c.theta = c.theta - (2 * PI);
+    }
     c.Re = c.r * cos(c.theta);
     c.Im = c.r * sin(c.theta);
     return c;
