@@ -2,13 +2,14 @@
 #define COMPLEXNUMBER_H
 #include <stdio.h>
 #include <math.h>
+#define PI acos(-1)
 class complexnumber
 {
 public:
     double Re;
     double Im;
-    double r;
-    double theta;
+    double r;     //[0,+infinity)
+    double theta; //[0,2PI)
     complexnumber();
     complexnumber(const long double x, const long double y, int opt);
     void print(int opt)
@@ -95,6 +96,7 @@ complexnumber operator*(const complexnumber &a, const complexnumber &b)
     complexnumber c;
     c.r = a.r * b.r;
     c.theta = a.theta + b.theta;
+    c.theta = c.theta - (floor(c.theta / (2 * PI)) * (2 * PI));
     c.Re = c.r * cos(c.theta);
     c.Im = c.r * sin(c.theta);
     return c;
@@ -104,12 +106,18 @@ complexnumber operator/(const complexnumber &a, const complexnumber &b)
     complexnumber c;
     c.r = a.r / b.r;
     c.theta = a.theta - b.theta;
+    c.theta = c.theta - (floor(c.theta / (2 * PI)) * (2 * PI));
     c.Re = c.r * cos(c.theta);
     c.Im = c.r * sin(c.theta);
     return c;
 }
 complexnumber operator^(const complexnumber &a, const complexnumber &b)
 {
+    if (a.r == 0)
+    {
+        complexnumber ans(0, 0, 0);
+        return ans;
+    }
     complexnumber c(log(a.r), a.theta, 0);
     complexnumber d = b * c;
     complexnumber ans(exp(d.Re), d.Im, 1);
