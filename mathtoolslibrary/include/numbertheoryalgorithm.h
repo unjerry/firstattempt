@@ -1,3 +1,8 @@
+//Z represent Zrhng
+//Z should contain
+/*
+operator==
+*/
 template <class Z>
 Z extended_euclidean(Z a, Z b, Z &x, Z &y);
 
