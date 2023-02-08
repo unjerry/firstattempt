@@ -72,6 +72,25 @@ public:
             break;
         }
     }
+    void operator=(const size_t &y)
+    {
+        switch (y)
+        {
+        case 1:
+            this->Re = 1;
+            this->Im = 0;
+            this->r = 1;
+            this->theta = 0;
+            break;
+
+        default:
+            this->Re = 0;
+            this->Im = 0;
+            this->r = 0;
+            this->theta = 0;
+            break;
+        }
+    }
 };
 complexnumber operator+(const complexnumber &a, const complexnumber &b)
 {

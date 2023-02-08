@@ -33,12 +33,9 @@ fieldmatrix<F>::fieldmatrix(const long long r, const long long c)
     for (int i = 1; i <= r; i++)
     {
         this->dt[i].resize(c + 1);
-    }
-    F zero;
-    for (int i = 1; i <= this->r; i++)
-    {
         for (int j = 1; j <= this->c; j++)
         {
+            F zero;
             dt[i][j] = zero;
         }
     }

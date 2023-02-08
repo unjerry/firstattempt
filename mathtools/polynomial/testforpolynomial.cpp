@@ -1,6 +1,5 @@
 #include "polynomial.h"
 #include "numbertheoryalgorithm.h"
-#include "..\..\mathtoolslibrary\src\numbertheoryalgorithm.cpp"
 #include <stdio.h>
 double a[10] = {1, 4, 3, 1, 1, 1, 1};
 double a2[10] = {1, 1, 1, 1, -3, -4, 23};
@@ -57,6 +56,13 @@ int main()
     int a = 38, b = 16, x, y, d;
     d = extended_euclidean<int>(a, b, x, y);
     printf("d=%d  %d*%d+%d*%d=%d\n", d, x, a, y, b, d);
+
+    int dd = fast_power<int>(d, 6);
+    pn DD = fast_power<pn>(Q, 6);
+
+    printf("%d\n", dd);
+    DD.print(1);
+    // printf("\n");
 
     /*
     int lb = factori(P, PP);
