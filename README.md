@@ -37,13 +37,14 @@ function explanation
 
 	identity tell $=$
 
-	$$\begin{equation}(a,b)=\left\{\begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}$$
+	\begin{equation}(a,b)=\left\{\begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}
 
-	$$(a,b)=
+	$$
 	\begin{cases}
-	1 & a=b\\
-	0 & a \neq b
-	\end{cases}$$
+	1  a=b\\
+	0  a \neq b
+	\end{cases}
+	$$
 
 
 2. realize standard input output
@@ -71,7 +72,7 @@ function explanation
 
 	noncommutative binary operator *
 
-	$:(A,B)\rightarrow C=AB,(A,B)\neq(A,B),\forall A,B\in\mathbb{F}^{n\times m},\exist C \in\mathbb{F}^{n\times m}$
+	$:(A,B)\rightarrow C=AB,(A,B)\neq(A,B),\forall A,B\in\mathbb{F}^{n\times m},\exists C \in\mathbb{F}^{n\times m}$
 
 
 #### numbertheoryalgorithm
@@ -88,7 +89,7 @@ function explanation
 	it works steable on euclidean ring which $Z$ refer an euclidean ring
 
 	it takes two ring element a,b and two position $x,y$
-	
+
 	gives back the common divisor $d$ of $a,b$
 
 	$x,y$ fufill the linear reqresentaion $xa+yb=d$
