@@ -39,10 +39,61 @@ function explanation
 
 	$$\begin{equation}(a,b)=\left\{\begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}$$
 
+	$$(a,b)=
+	\begin{cases}
+	1 & a=b\\
+	0 & a \neq b
+	\end{cases}$$
+
 
 2. realize standard input output
 
-complex.output(FILE *f,int opt)
+	complex.output(FILE *f,int opt)
+	complex.input(FILE *f,int opt)
+	(a+bi)
+	a, b is wait to change
+	$a,b \in \mathbb{R}$
+
+3. realization
+
+	complexnumber.h(inline realization)
+
+### mathtoolstemplate
+
+#### fieldmatrix
+
+function explanation
+1. provide some basic matrix operatrions over any field $\mathbb{F}$
+	
+	include:
+
+	1.matrix multipulication
+
+	noncommutative binary operator *
+
+	$:(A,B)\rightarrow C=AB,(A,B)\neq(A,B),\forall A,B\in\mathbb{F}^{n\times m},\exist C \in\mathbb{F}^{n\times m}$
+
+
+#### numbertheoryalgorithm
+
+1. extended_euclidean
+
+	function prototype
+
+	template \<class Z>
+	Z extended_euclidean(Z a, Z b, Z &x, Z &y);
+
+	function explanation
+
+	it works steable on euclidean ring which $Z$ refer an euclidean ring
+
+	it takes two ring element a,b and two position $x,y$
+	
+	gives back the common divisor $d$ of $a,b$
+
+	$x,y$ fufill the linear reqresentaion $xa+yb=d$
+
+
 
 ### mathtools
 
