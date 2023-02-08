@@ -46,6 +46,15 @@ function explanation
 	\end{cases}
 	$$
 
+	$ F^{HLLC}=\left\{
+	\begin{array}{rcl}
+	F_L       &      & {0      <      S_L}\\
+	F^*_L     &      & {S_L \leq 0 < S_M}\\
+	F^*_R     &      & {S_M \leq 0 < S_R}\\
+	F_R       &      & {S_R \leq 0}
+	\end{array} \right. $
+
+
 
 2. realize standard input output
 
