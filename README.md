@@ -41,13 +41,13 @@ function explanation
 	$$
 
 	$$
-	\begin {cases}
+	\begin{cases}
 	1  a=b \\ 
 	0  a \neq b 
-	\end {cases}
+	\end{cases}
 	$$
 
-	$ F^{HLLC}=\{ sdf\\sdf$
+	$$ F^{HLLC}=\{ sdf\\sdf$$
 
 	$$ A_{1b} = \left[\begin{array}{ccc} 1 & 0 & 0 \\ -D & 1 & 0 \\ 0 & 0 & 1 \end{array} \right] $$ 
 
