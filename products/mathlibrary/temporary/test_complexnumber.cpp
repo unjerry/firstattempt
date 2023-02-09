@@ -50,5 +50,14 @@ int main()
     (tmp / z).print();
     printf("\n");
 
+    complexnumber zero;
+    printf("zero\n");
+    z = tmp / zero;
+    (z).print();
+    printf("\n");
+    z = tmp * zero;
+    (z).print();
+    printf("\n");
+
     return 0;
 }
