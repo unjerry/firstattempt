@@ -1,8 +1,13 @@
 #include "pfieldnumber.h"
 #include "complexnumber.h"
 #include "fieldmatrix.h"
+#include <vector>
 int main()
 {
+    int lst[1000000000];
+    std::vector<int> clst;
+    clst.resize(1000000000);
+
     FILE *f;
     fieldmatrix<pfieldnumber> M(2, 3), B;
     pfieldnumber a(4, 5);
