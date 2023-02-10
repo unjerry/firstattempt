@@ -7,6 +7,8 @@ int leng = 2;
 pn P(a, 4);
 pn P2(a2, 3), P3;
 pn PP[100];
+double coeff[10] = {1, 2, 1, 1};
+pn ff(coeff, 4);
 
 int factori(pn P, pn *PL)
 {
@@ -62,7 +64,25 @@ int main()
 
     printf("%d\n", dd);
     DD.print(1);
-    // printf("\n");
+    printf("\n-----------\n");
+
+    ff.print(1);
+    printf("\n");
+    double coefff[10] = {-2.3238095, 0.78095, 1, 1};
+    double coeffff[10] = {0, 1, 1, 1};
+    pn pr(coefff, 3), g, rr, Xx(coeffff, 2);
+    pr.print(1);
+    printf("\n");
+    g = ff / pr;
+    g.print(1);
+    printf("\n");
+    rr = ff % pr;
+    rr.print(1);
+    printf("\n-------\n");
+    ((Xx * g) % pr).print(1);
+    printf("\n");
+    (g % pr).print(1);
+    printf("\n");
 
     /*
     int lb = factori(P, PP);
