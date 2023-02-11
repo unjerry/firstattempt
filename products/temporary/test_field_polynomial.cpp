@@ -45,5 +45,17 @@ int main()
     y.print();
     printf("\n");
 
+    // d = derive_polynomial(d);
+    a.print();
+    printf("\n");
+
+    std::vector<complexnumber> vv;
+    vv = factorization(a);
+    printf("len=%d\n", vv.size());
+    for (int i = 0; i < vv.size(); i++)
+    {
+        vv[i].print();
+    }
+
     return 0;
 }

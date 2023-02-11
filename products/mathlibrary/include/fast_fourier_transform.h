@@ -1,8 +1,8 @@
 #ifndef FAST_FOURIER_TRANSFORM_H
 #define FAST_FOURIER_TRANSFORM_H
 
-#include "field_matrix.h"
 #include "complexnumber.h"
+#include "field_matrix.h"
 #include <math.h>
 
 #define PI acos(-1)

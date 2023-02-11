@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <stdio.h>
+#include "number_theory_algorithm.h"
 
 template <class F>
 class field_matrix
@@ -536,31 +537,5 @@ field_matrix<F> spectral_decomposition(const field_matrix<F> &x) // not ready an
         c = tc + 1;
     }
     return M;
-}
-template <class E>
-E character_polynomial(const field_matrix<E> &x) // E means Euclidean Ring not ready and im tendto make it a sudoinverse
-{
-    if (x.r)
-        if (x.r != x.c)
-        {
-            E r;
-            return r;
-        }
-    long long N = x.c;
-    field_matrix<E> M = x, M1(N - 1, N - 1);
-    E P;
-    P = 1;
-    for (int i = 1; i <= N; i++)
-    {
-        P = P * M.dt[i][1];
-    }
-    for (int i = 1; i <= N - 1; i++)
-    {
-        for (int j = 1; i <= N - 1; j++)
-        {
-            M1.dt[i][j] = M.dt[i + 1][j + 1] * P / M.dt[i + 1][1] - M.dt[1][j + 1] * P / M.dt[1][1];
-        }
-    }
-    return character_polynomial(M1) / P;
 }
 #endif

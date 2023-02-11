@@ -7,6 +7,7 @@
 #include "complexnumber.h"
 #include "field_matrix.h"
 #include "list_convolution.h"
+#include "number_theory_algorithm.h"
 
 #define FIELD_POLYNOMIAL_MAX(a, b) ((a > b) ? (a) : (b))
 #define FIELD_POLYNOMIAL_MIN(a, b) ((a < b) ? (a) : (b))
@@ -26,6 +27,8 @@ public:
     int scan(int opt = 0);
     int fscan(FILE *f, int opt = 0);
     void operator=(const size_t &y);
+    void monic_polynomialize();
+    F interopolation(const F &x);
 };
 template <class F>
 field_polynomial<F>::field_polynomial()
@@ -197,6 +200,20 @@ void field_polynomial<F>::operator=(const size_t &y)
         this->dt[0] = 0;
         break;
     }
+}
+template <class F>
+void field_polynomial<F>::monic_polynomialize()
+{
+}
+template <class F>
+F field_polynomial<F>::interopolation(const F &x)
+{
+    F ans;
+    for (int i = 0; i < this->dt.size(); i++)
+    {
+        ans = ans + (this->dt[i] * fast_power(x, i));
+    }
+    return ans;
 }
 
 template <class F>
@@ -412,4 +429,87 @@ field_polynomial<F> factor_by_Shie(const field_polynomial<F> &f, const field_pol
     return hh;
     */
 }
+template <class F>
+field_polynomial<F> derive_polynomial(const field_polynomial<F> &P)
+{
+    field_polynomial<F> tmp;
+    tmp.dt.resize(FIELD_POLYNOMIAL_MAX(P.dt.size() - 1, 1));
+    tmp.dt[0] = 0;
+    for (int i = 1; i < P.dt.size(); i++)
+    {
+        tmp.dt[i - 1] = fast_addition(P.dt[i], i);
+    }
+    return tmp;
+}
+
+std::vector<complexnumber> factorization(const field_polynomial<complexnumber> &P)
+{
+    std::vector<complexnumber> ans;
+    ans.resize(0);
+    if ((long long)(P.dt.size()) == 1)
+    {
+        return ans;
+    }
+    long long l = -1;
+    complexnumber zero;
+    for (int i = 0; i < P.dt.size(); i++)
+    {
+        if (!(P.dt[i] == zero))
+        {
+            l = i;
+            break;
+        }
+    }
+    if (l == -1)
+    {
+        return ans;
+    }
+    printf("l=%d\n", l);
+    field_polynomial<complexnumber> dP, Pp, Q, h;
+    dP = derive_polynomial(P);
+    Pp.dt.resize(P.dt.size() - l);
+    for (int i = 0; i < Pp.dt.size(); i++)
+    {
+        Pp.dt[i] = P.dt[i + l];
+    }
+    complexnumber r, val;
+
+    val = Pp.interopolation(r);
+    /*
+    printf("Pp=");
+    Pp.print();
+    printf("\n");
+    printf("dP=");
+    dP.print();
+    printf("\n");
+    printf("r=");
+    r.print();
+    printf("\n");
+    printf("val=");
+    val.print();
+    printf("\n");
+    */
+    while (!(val == zero))
+    {
+        // printf("r=");
+        // r.print();
+        // printf("\n");
+        r = r - (Pp.interopolation(r) / dP.interopolation(r));
+        val = Pp.interopolation(r);
+    }
+    h.dt.resize(2);
+    h.dt[0] = -r;
+    h.dt[1] = 1;
+    printf("h=\n");
+    h.print();
+    Q = Pp / h;
+    ans = factorization(Q);
+    ans.push_back(r);
+    for (int i = 1; i <= l; i++)
+    {
+        ans.push_back(zero);
+    }
+    return ans;
+}
+
 #endif

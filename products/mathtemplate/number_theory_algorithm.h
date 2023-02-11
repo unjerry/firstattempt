@@ -47,4 +47,22 @@ G fast_power(G a, size_t b)
     }
     return ans;
 }
+
+template <class A>
+A fast_addition(A a, size_t b)
+{
+    A ans;
+    ans = 0;
+    A res = a;
+    while (b)
+    {
+        if (b % 2 == 1)
+        {
+            ans = ans + a;
+        }
+        a = a + a;
+        b = b / 2;
+    }
+    return ans;
+}
 #endif
