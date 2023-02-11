@@ -538,14 +538,14 @@ field_matrix<F> spectral_decomposition(const field_matrix<F> &x) // not ready an
     return M;
 }
 template <class E>
-E character_polynomial(const field_matrix<E> &x) // not ready and im tendto make it a sudoinverse
+E character_polynomial(const field_matrix<E> &x) // E means Euclidean Ring not ready and im tendto make it a sudoinverse
 {
-    if(x.r)
-    if (x.r != x.c)
-    {
-        E r;
-        return r;
-    }
+    if (x.r)
+        if (x.r != x.c)
+        {
+            E r;
+            return r;
+        }
     long long N = x.c;
     field_matrix<E> M = x, M1(N - 1, N - 1);
     E P;
