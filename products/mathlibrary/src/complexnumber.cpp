@@ -170,7 +170,7 @@ complexnumber operator^(const complexnumber &a, const complexnumber &b)
 }
 bool operator==(const complexnumber &a, const complexnumber &b)
 {
-    if ((a - b).r < 1e-18)
+    if ((a - b).r < 1e-8)
     {
         return 1;
     }

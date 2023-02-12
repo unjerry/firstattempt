@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <math.h>
 #include "complexnumber.h"
-#include "field_matrix.h"
 #include "list_convolution.h"
 #include "number_theory_algorithm.h"
 
@@ -280,27 +279,15 @@ field_polynomial<F> operator*(const field_polynomial<F> &x, const field_polynomi
     }
     return z;
 }
+/*
 field_polynomial<complexnumber> operator*(const field_polynomial<complexnumber> &x, const field_polynomial<complexnumber> &y) // polynomial muti O(N^2)
 {
-    printf("fft mutiplication\n");
+    printf("field_polynomial_mutiplicationNOTICE:fft mutiplication\n");
     field_polynomial<complexnumber> z;
-    z.dt.resize(x.dt.size() - 1 + y.dt.size() - 1 + 1);
-    field_matrix<complexnumber> Z, X(x.dt.size(), 1), Y(y.dt.size(), 1);
-    for (int i = 0; i < x.dt.size(); i++)
-    {
-        X.dt[i + 1][1] = x.dt[i];
-    }
-    for (int i = 0; i < y.dt.size(); i++)
-    {
-        Y.dt[i + 1][1] = y.dt[i];
-    }
-    Z = list_convolution(X, Y);
-    for (int i = 0; i < z.dt.size(); i++)
-    {
-        z.dt[i] = Z.dt[i + 1][1];
-    }
+    z.dt = list_convolution(x.dt, y.dt);
     return z;
 }
+*/
 template <class F>
 field_polynomial<F> operator/(const field_polynomial<F> &x, const field_polynomial<F> &y) // polynomial divi O(N^2)
 {
@@ -309,7 +296,7 @@ field_polynomial<F> operator/(const field_polynomial<F> &x, const field_polynomi
     size_t degx = x.dt.size() - 1;
     size_t degy = y.dt.size() - 1;
     size_t degz = degx - degy;
-    printf("dg=%d", degz);
+    printf("field_polynomial_divisionNOTICE:dg=%d\n", degz);
     z.dt.resize(FIELD_POLYNOMIAL_MAX(degz + 1, 1));
     F leady = y.dt[degy];
     for (int i = degz; i >= 0; i--)
@@ -464,7 +451,7 @@ std::vector<complexnumber> factorization(const field_polynomial<complexnumber> &
     {
         return ans;
     }
-    printf("l=%d\n", l);
+    printf("field_polynomial_factoriazationNOTICE:l=%d\n", l);
     field_polynomial<complexnumber> dP, Pp, Q, h;
     dP = derive_polynomial(P);
     Pp.dt.resize(P.dt.size() - l);
@@ -500,8 +487,9 @@ std::vector<complexnumber> factorization(const field_polynomial<complexnumber> &
     h.dt.resize(2);
     h.dt[0] = -r;
     h.dt[1] = 1;
-    printf("h=\n");
+    printf("dominator=h=");
     h.print();
+    printf("\n");
     Q = Pp / h;
     ans = factorization(Q);
     ans.push_back(r);
