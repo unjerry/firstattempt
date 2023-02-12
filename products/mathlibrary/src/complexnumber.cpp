@@ -42,41 +42,45 @@ void complexnumber::fprint(FILE *f, int opt)
         break;
     }
 }
-void complexnumber::scan(int opt)
+int complexnumber::scan(int opt)
 {
+    int rt;
     switch (opt)
     {
     case 0:
         scanf("%*[^(]");
-        scanf("(%lf+%lfi)", &this->Re, &this->Im);
+        rt = scanf("(%lf+%lfi)", &this->Re, &this->Im);
         this->r = sqrt(this->Re * this->Re + this->Im * this->Im);
         this->theta = atan2(this->Im, this->Re);
         break;
     case 1:
         scanf("%*[^(]");
-        scanf("(%lf*e^i%lf)", &this->r, &this->theta);
+        rt = scanf("(%lf*e^i%lf)", &this->r, &this->theta);
         this->Re = this->r * cos(this->theta);
         this->Im = this->r * sin(this->theta);
         break;
     }
+    return rt;
 }
-void complexnumber::fscan(FILE *f, int opt)
+int complexnumber::fscan(FILE *f, int opt)
 {
+    int rt;
     switch (opt)
     {
     case 0:
         fscanf(f, "%*[^(]");
-        fscanf(f, "(%lf+%lfi)", &this->Re, &this->Im);
+        rt = fscanf(f, "(%lf+%lfi)", &this->Re, &this->Im);
         this->r = sqrt(this->Re * this->Re + this->Im * this->Im);
         this->theta = atan2(this->Im, this->Re);
         break;
     case 1:
         fscanf(f, "%*[^(]");
-        fscanf(f, "(%lf*e^i%lf)", &this->r, &this->theta);
+        rt = fscanf(f, "(%lf*e^i%lf)", &this->r, &this->theta);
         this->Re = this->r * cos(this->theta);
         this->Im = this->r * sin(this->theta);
         break;
     }
+    return rt;
 }
 void complexnumber::operator=(const size_t &y)
 {
@@ -166,7 +170,7 @@ complexnumber operator^(const complexnumber &a, const complexnumber &b)
 }
 bool operator==(const complexnumber &a, const complexnumber &b)
 {
-    if ((a - b).r < 1e-7)
+    if ((a - b).r < 1e-18)
     {
         return 1;
     }
@@ -174,4 +178,9 @@ bool operator==(const complexnumber &a, const complexnumber &b)
     {
         return 0;
     }
+}
+complexnumber generate_primitive_unit_root(const size_t &degree)
+{
+    complexnumber zero;
+    return zero;
 }

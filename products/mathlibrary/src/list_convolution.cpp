@@ -1,33 +1,45 @@
 #include "list_convolution.h"
 
-field_matrix<complexnumber> list_convolution(const field_matrix<complexnumber> &a, const field_matrix<complexnumber> &b)
+std::vector<complexnumber> list_convolution(const std::vector<complexnumber> &a, const std::vector<complexnumber> &b)
 {
-    long long N = exp2(ceil(log2(a.r + b.r - 1)));
-    complexnumber complex_N(N, 0, 0);
-    field_matrix<complexnumber> ac(N, 1);
-    for (int i = 1; i <= a.r; i++)
+    long long LENA = a.size();
+    long long LENB = b.size();
+    long long NN = LENA + LENB - 1;
+    long long N = exp2(ceil(log2(NN)));
+    complexnumber complex_N(N, 0, 0); // wait for another api
+
+    std::vector<complexnumber> ac;
+    ac.resize(N);
+    for (int i = 0; i < LENA; i++)
     {
-        ac.dt[i][1] = a.dt[i][1];
+        ac[i] = a[i];
     }
-    field_matrix<complexnumber> bc(N, 1);
-    for (int i = 1; i <= b.r; i++)
+    std::vector<complexnumber> bc;
+    bc.resize(N);
+    for (int i = 0; i < LENB; i++)
     {
-        bc.dt[i][1] = b.dt[i][1];
+        bc[i] = b[i];
     }
-    field_matrix<complexnumber> A(N, 1), B(N, 1), C(N, 1);
-    A = fast_fourier_transform(ac, 1);
-    B = fast_fourier_transform(bc, 1);
-    for (int i = 1; i <= N; i++)
+
+    std::vector<complexnumber> A, B, C;
+    A = fast_fourier_transform_of_power_two(ac, 1);
+    B = fast_fourier_transform_of_power_two(bc, 1);
+
+    C.resize(N);
+    for (int i = 0; i < N; i++)
     {
-        C.dt[i][1] = A.dt[i][1] * B.dt[i][1] / complex_N;
+        C[i] = (A[i] / complex_N) * B[i];
     }
-    field_matrix<complexnumber> cc(N, 1);
-    cc = fast_fourier_transform(C, -1);
-    long long NN = a.r + b.r - 1;
-    field_matrix<complexnumber> c(NN, 1);
-    for (int i = 1; i <= NN; i++)
+
+    std::vector<complexnumber> cc;
+    cc = fast_fourier_transform_of_power_two(C, -1);
+
+    std::vector<complexnumber> c;
+    c.resize(NN);
+    for (int i = 0; i < NN; i++)
     {
-        c.dt[i][1] = cc.dt[i][1];
+        c[i] = cc[i];
     }
+
     return c;
 }
