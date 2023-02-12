@@ -18,7 +18,9 @@ int main()
     MP.print();
 
     P = character_polynomial(M);
-    P.print();
+    f = fopen("test_fieldmatrix_3.out", "wb");
+    P.fprint(f, 2);
+    fclose(f);
 
     return 0;
 }
