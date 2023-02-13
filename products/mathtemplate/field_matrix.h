@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include "number_theory_algorithm.h"
 
+#define FIELD_MATRIX_MAX(a, b) ((a > b) ? (a) : (b))
+
 template <class F>
 class field_matrix
 {
@@ -16,6 +18,7 @@ public:
     void fprint(FILE *f, int opt = 0);
     int scan(int opt = 0);
     int fscan(FILE *f, int opt = 0);
+    field_matrix operator-();
 };
 template <class F>
 field_matrix<F>::field_matrix(const long long r, const long long c)
@@ -136,6 +139,19 @@ int field_matrix<F>::fscan(FILE *f, int opt)
     fscanf(f, "]\n");
     return rt;
 }
+template <class F>
+field_matrix<F> field_matrix<F>::operator-()
+{
+    field_matrix<F> ans(this->r, this->c);
+    for (int i = 1; i <= ans.r; i++)
+    {
+        for (int j = 1; j <= ans.c; j++)
+        {
+            ans.dt[i][j] = -this->dt[i][j];
+        }
+    }
+    return ans;
+}
 
 template <class F>
 field_matrix<F> operator*(const field_matrix<F> &a, const field_matrix<F> &b)
@@ -160,6 +176,67 @@ field_matrix<F> operator*(const field_matrix<F> &a, const field_matrix<F> &b)
         field_matrix<F> c;
         return c;
     }
+}
+template <class F>
+field_matrix<F> operator+(const field_matrix<F> &a, const field_matrix<F> &b)
+{
+    if (a.r != b.r || a.c != b.c)
+    {
+        printf("field_matrix_additionNOTICE:matrix size different\n");
+    }
+    field_matrix<F> c(FIELD_MATRIX_MAX(a.r, b.r), FIELD_MATRIX_MAX(a.c, b.c));
+    for (int i = 1; i <= a.r; i++)
+    {
+        for (int j = 1; j <= a.c; j++)
+        {
+            c.dt[i][j] = c.dt[i][j] + a.dt[i][j];
+        }
+    }
+    for (int i = 1; i <= b.r; i++)
+    {
+        for (int j = 1; j <= b.c; j++)
+        {
+            c.dt[i][j] = c.dt[i][j] + b.dt[i][j];
+        }
+    }
+    return c;
+}
+template <class F>
+field_matrix<F> operator-(const field_matrix<F> &a, const field_matrix<F> &b)
+{
+    field_matrix<F> tmp = b;
+    return a + (-tmp);
+}
+template <class F>
+field_matrix<F> matrix_pointwise_multiplication(const field_matrix<F> &a, const field_matrix<F> &b)
+{
+    if (a.r != b.r || a.c != b.c)
+    {
+        printf("field_matrix_pointwise_multiplicationNOTICE:matrix size different\n");
+    }
+    field_matrix<F> c(FIELD_MATRIX_MAX(a.r, b.r), FIELD_MATRIX_MAX(a.c, b.c));
+    for (int i = 1; i <= c.r; i++)
+    {
+        for (int j = 1; j <= c.c; j++)
+        {
+            c.dt[i][j] = 1;
+        }
+    }
+    for (int i = 1; i <= a.r; i++)
+    {
+        for (int j = 1; j <= a.c; j++)
+        {
+            c.dt[i][j] = c.dt[i][j] * a.dt[i][j];
+        }
+    }
+    for (int i = 1; i <= b.r; i++)
+    {
+        for (int j = 1; j <= b.c; j++)
+        {
+            c.dt[i][j] = c.dt[i][j] * b.dt[i][j];
+        }
+    }
+    return c;
 }
 template <class F>
 field_matrix<F> row_echelon(const field_matrix<F> &x)

@@ -1,3 +1,6 @@
+#ifndef FIELD_MATRIX_ALGORITHM
+#define FIELD_MATRIX_ALGORITHM
+
 #include "field_matrix.h"
 #include "field_polynomial.h"
 
@@ -63,3 +66,5 @@ field_polynomial<F> character_polynomial(const field_matrix<F> &x) // E means Eu
     M.print();
     return character_polynomial(M);
 }
+
+#endif
