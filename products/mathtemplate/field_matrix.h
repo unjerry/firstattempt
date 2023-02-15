@@ -178,11 +178,25 @@ field_matrix<F> operator*(const field_matrix<F> &a, const field_matrix<F> &b)
     }
 }
 template <class F>
+field_matrix<F> operator*(const F &a, const field_matrix<F> &b)
+{
+    //printf("field_matrix_number_multiplicationNOTICE:scalor multiplication\n");
+    field_matrix<F> c(b.r, b.c);
+    for (int i = 1; i <= c.r; i++)
+    {
+        for (int j = 1; j <= c.c; j++)
+        {
+            c.dt[i][j] = a * b.dt[i][j];
+        }
+    }
+    return c;
+}
+template <class F>
 field_matrix<F> operator+(const field_matrix<F> &a, const field_matrix<F> &b)
 {
     if (a.r != b.r || a.c != b.c)
     {
-        printf("field_matrix_additionNOTICE:matrix size different\n");
+        // printf("field_matrix_additionNOTICE:matrix size different\n");
     }
     field_matrix<F> c(FIELD_MATRIX_MAX(a.r, b.r), FIELD_MATRIX_MAX(a.c, b.c));
     for (int i = 1; i <= a.r; i++)
