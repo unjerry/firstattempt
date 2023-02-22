@@ -6,6 +6,7 @@
 #include "number_theory_algorithm.h"
 
 #define FIELD_MATRIX_MAX(a, b) ((a > b) ? (a) : (b))
+#define FIELD_MATRIX_MIN(a, b) ((a < b) ? (a) : (b))
 
 template <class F>
 class field_matrix
@@ -180,7 +181,7 @@ field_matrix<F> operator*(const field_matrix<F> &a, const field_matrix<F> &b)
 template <class F>
 field_matrix<F> operator*(const F &a, const field_matrix<F> &b)
 {
-    //printf("field_matrix_number_multiplicationNOTICE:scalor multiplication\n");
+    // printf("field_matrix_number_multiplicationNOTICE:scalor multiplication\n");
     field_matrix<F> c(b.r, b.c);
     for (int i = 1; i <= c.r; i++)
     {
@@ -387,81 +388,6 @@ field_matrix<F> column_echelon(const field_matrix<F> &x) // can be replace by tr
     return M;
 }
 template <class F>
-field_matrix<F> inverse(const field_matrix<F> &x) // not ready and im tendto make it a sudoinverse
-{
-    field_matrix<F> M = x;
-    // printf("m\n");
-    // M.print(0);
-    const F zero;
-    int r = 1;
-    int c = 1;
-    int tr;
-    int tc;
-    F tmp;
-
-    // for(int i=)
-
-    while (1)
-    {
-        if (r > M.r || c > M.c)
-        {
-            break;
-        }
-        // printf("%d %d\n", r, c);
-        tr = tc = 0;
-        for (int j = c; j <= M.c; j++)
-        {
-            if (tr != 0)
-            {
-                break;
-            }
-            for (int i = r; i <= M.r; i++)
-            {
-                if (!(M.dt[i][j] == zero))
-                {
-                    tr = i;
-                    tc = j;
-                    break;
-                }
-            }
-        }
-        if (tr == 0)
-        {
-            break;
-        }
-        // printf("tr=%d tc=%d\n", tr, tc);
-        //   exchange
-        for (int j = tc; j <= M.c; j++)
-        {
-            tmp = M.dt[r][j];
-            M.dt[r][j] = M.dt[tr][j];
-            M.dt[tr][j] = tmp;
-        }
-        tmp = M.dt[r][tc];
-        for (int j = tc; j <= M.c; j++)
-        {
-            M.dt[r][j] = M.dt[r][j] / tmp;
-        }
-        for (int i = 1; i <= M.r; i++)
-        {
-            if (i == r)
-            {
-                continue;
-            }
-            tmp = M.dt[i][tc];
-            for (int j = tc; j <= M.c; j++)
-            {
-                M.dt[i][j] = M.dt[i][j] - M.dt[r][j] * tmp;
-            }
-        }
-        // M.print(0);
-        // printf("%dr\n", r);
-        r += 1;
-        c = tc + 1;
-    }
-    return M;
-}
-template <class F>
 field_matrix<F> transpose(const field_matrix<F> &x) // not ready and im tendto make it a sudoinverse
 {
     field_matrix<F> M(x.c, x.r);
@@ -475,158 +401,34 @@ field_matrix<F> transpose(const field_matrix<F> &x) // not ready and im tendto m
     return M;
 }
 template <class F>
+F determinant(const field_matrix<F> &x) // E means Euclidean Ring not ready and im tendto make it a sudoinverse
+{
+    if (x.r != x.c)
+    {
+        F r;
+        return r;
+    }
+    if (x.r == 1)
+    {
+        return x.dt[1][1];
+    }
+    long long N = x.c;
+    field_matrix<F> M = x, M1(N - 1, N - 1);
+    F P;
+    P = M.dt[1][1];
+    for (int i = 1; i <= N - 1; i++)
+    {
+        for (int j = 1; j <= N - 1; j++)
+        {
+            // printf("i=%d j=%d\n", i, j);
+            M1.dt[i][j] = M.dt[i + 1][j + 1] * M.dt[1][1] - M.dt[1][j + 1] * M.dt[i + 1][1];
+        }
+    }
+    return determinant(M1) / fast_power(P, M.r - 2);
+}
+template <class F>
 field_matrix<F> equivalent_normalized_form(const field_matrix<F> &x)
 {
     return column_echelon(row_echelon(x));
-}
-template <class F>
-field_matrix<F> singular_value_decomposition(const field_matrix<F> &x, field_matrix<F> &U, field_matrix<F> &Sigma, field_matrix<F> &V) // not ready and im tendto make it a sudoinverse
-{
-    field_matrix<F> M = x;
-    // printf("m\n");
-    // M.print(0);
-    const F zero;
-    int r = 1;
-    int c = 1;
-    int tr;
-    int tc;
-    F tmp;
-
-    // for(int i=)
-
-    while (1)
-    {
-        if (r > M.r || c > M.c)
-        {
-            break;
-        }
-        // printf("%d %d\n", r, c);
-        tr = tc = 0;
-        for (int j = c; j <= M.c; j++)
-        {
-            if (tr != 0)
-            {
-                break;
-            }
-            for (int i = r; i <= M.r; i++)
-            {
-                if (!(M.dt[i][j] == zero))
-                {
-                    tr = i;
-                    tc = j;
-                    break;
-                }
-            }
-        }
-        if (tr == 0)
-        {
-            break;
-        }
-        // printf("tr=%d tc=%d\n", tr, tc);
-        //   exchange
-        for (int j = tc; j <= M.c; j++)
-        {
-            tmp = M.dt[r][j];
-            M.dt[r][j] = M.dt[tr][j];
-            M.dt[tr][j] = tmp;
-        }
-        tmp = M.dt[r][tc];
-        for (int j = tc; j <= M.c; j++)
-        {
-            M.dt[r][j] = M.dt[r][j] / tmp;
-        }
-        for (int i = 1; i <= M.r; i++)
-        {
-            if (i == r)
-            {
-                continue;
-            }
-            tmp = M.dt[i][tc];
-            for (int j = tc; j <= M.c; j++)
-            {
-                M.dt[i][j] = M.dt[i][j] - M.dt[r][j] * tmp;
-            }
-        }
-        // M.print(0);
-        // printf("%dr\n", r);
-        r += 1;
-        c = tc + 1;
-    }
-    return M;
-}
-template <class F>
-field_matrix<F> spectral_decomposition(const field_matrix<F> &x) // not ready and im tendto make it a sudoinverse
-{
-    field_matrix<F> M = x;
-    // printf("m\n");
-    // M.print(0);
-    const F zero;
-    int r = 1;
-    int c = 1;
-    int tr;
-    int tc;
-    F tmp;
-
-    // for(int i=)
-
-    while (1)
-    {
-        if (r > M.r || c > M.c)
-        {
-            break;
-        }
-        // printf("%d %d\n", r, c);
-        tr = tc = 0;
-        for (int j = c; j <= M.c; j++)
-        {
-            if (tr != 0)
-            {
-                break;
-            }
-            for (int i = r; i <= M.r; i++)
-            {
-                if (!(M.dt[i][j] == zero))
-                {
-                    tr = i;
-                    tc = j;
-                    break;
-                }
-            }
-        }
-        if (tr == 0)
-        {
-            break;
-        }
-        // printf("tr=%d tc=%d\n", tr, tc);
-        //   exchange
-        for (int j = tc; j <= M.c; j++)
-        {
-            tmp = M.dt[r][j];
-            M.dt[r][j] = M.dt[tr][j];
-            M.dt[tr][j] = tmp;
-        }
-        tmp = M.dt[r][tc];
-        for (int j = tc; j <= M.c; j++)
-        {
-            M.dt[r][j] = M.dt[r][j] / tmp;
-        }
-        for (int i = 1; i <= M.r; i++)
-        {
-            if (i == r)
-            {
-                continue;
-            }
-            tmp = M.dt[i][tc];
-            for (int j = tc; j <= M.c; j++)
-            {
-                M.dt[i][j] = M.dt[i][j] - M.dt[r][j] * tmp;
-            }
-        }
-        // M.print(0);
-        // printf("%dr\n", r);
-        r += 1;
-        c = tc + 1;
-    }
-    return M;
 }
 #endif

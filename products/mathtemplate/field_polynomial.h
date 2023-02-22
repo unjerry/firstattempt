@@ -437,6 +437,26 @@ std::vector<complexnumber> factorization(const field_polynomial<complexnumber> &
     {
         return ans;
     }
+    if ((long long)(P.dt.size()) == 2)
+    {
+        complexnumber a = P.dt[1];
+        complexnumber b = P.dt[0];
+        ans.push_back(-b / a);
+        return ans;
+    }
+    if ((long long)(P.dt.size()) == 3)
+    {
+        complexnumber c_2(2, 0);
+        complexnumber c_4(4, 0);
+        complexnumber c_1_2(0.5, 0);
+        complexnumber a = P.dt[2];
+        complexnumber b = P.dt[1];
+        complexnumber c = P.dt[0];
+        complexnumber delta = (b * b) - (c_4 * a * c);
+        ans.push_back((-b + (delta ^ c_1_2)) / (c_2 * a));
+        ans.push_back((-b - (delta ^ c_1_2)) / (c_2 * a));
+        return ans;
+    }
     long long l = -1;
     complexnumber zero;
     for (int i = 0; i < P.dt.size(); i++)
@@ -453,12 +473,12 @@ std::vector<complexnumber> factorization(const field_polynomial<complexnumber> &
     }
     printf("field_polynomial_factoriazationNOTICE:l=%d\n", l);
     field_polynomial<complexnumber> dP, Pp, Q, h;
-    dP = derive_polynomial(P);
     Pp.dt.resize(P.dt.size() - l);
     for (int i = 0; i < Pp.dt.size(); i++)
     {
         Pp.dt[i] = P.dt[i + l];
     }
+    dP = derive_polynomial(Pp);
     complexnumber r, val;
 
     val = Pp.interopolation(r);

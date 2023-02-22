@@ -108,7 +108,7 @@ int main()
     for (int i = 0; i < 441; i++)
     {
         X[i].fscan(f);
-        X[i] = scc * X[i];
+        //X[i] = scc * X[i];
         Y[i] = Func(X[i]);
     }
     X[1].print();
@@ -118,7 +118,7 @@ int main()
     printf("star\n");
     for (int T = 1; T <= 1; T++)
     {
-        for (int t = 0; t < 441; t++)
+        for (int t = 0; t < 5; t++)
         {
             A[0] = X[t];
             for (int i = 1; i <= 3; i++)
