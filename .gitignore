@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# dataset
+*.gz
+*.idx3-ubyte
