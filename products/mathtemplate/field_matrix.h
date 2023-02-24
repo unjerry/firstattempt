@@ -427,6 +427,19 @@ F determinant(const field_matrix<F> &x) // E means Euclidean Ring not ready and 
     return determinant(M1) / fast_power(P, M.r - 2);
 }
 template <class F>
+F norm(const field_matrix<F> &x) // E means Euclidean Ring not ready and im tendto make it a sudoinverse
+{
+    F ans;
+    for (int i = 1; i <= x.r; i++)
+    {
+        for (int j = 1; j <= x.c; j++)
+        {
+            ans = ans + (x.dt[i][j] * x.dt[i][j]);
+        }
+    }
+    return ans;
+}
+template <class F>
 field_matrix<F> equivalent_normalized_form(const field_matrix<F> &x)
 {
     return column_echelon(row_echelon(x));
