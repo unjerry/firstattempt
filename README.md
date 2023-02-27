@@ -35,21 +35,7 @@ function explanation
 
 	$:(a,b)\rightarrow c=a^b,\forall a,b,\in\mathbb{C}$
 
-	identity tell $=$
-
-	$$ \begin{equation}(a,b)=\left\{ \begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}
-	$$
-
-	$$
-	\begin{cases}
-	1  a=b \\ 
-	0  a \neq b 
-	\end{cases}
-	$$
-
-	$$ F^{HLLC}=\{ sdf\\sdf$$
-
-	$$ A_{1b} = \left[\begin{array}{ccc} 1 & 0 & 0 \\ -D & 1 & 0 \\ 0 & 0 & 1 \end{array} \right] $$ 
+	4.identity tell $=$
 
 
 
@@ -61,9 +47,12 @@ function explanation
 	a, b is wait to change
 	$a,b \in \mathbb{R}$
 
+
 3. realization
 
-	complexnumber.h(inline realization)
+	complexnumber.lib
+	complexnumber.dll
+
 
 ### mathtoolstemplate
 
@@ -101,6 +90,10 @@ function explanation
 	$x,y$ fufill the linear reqresentaion $xa+yb=d$
 
 
+#### fast_fourier_transform(complexnumber_version)
+
+function explanation
+
 
 ### mathtools
 
@@ -119,5 +112,21 @@ where zeta[i]=e^((2PI*Im/N)*i)
 
 a splitwave is a function takes a list of "complexnumber" a[N] as input and gives a list of list of "complexnumber" b[ceil(log2(N))][N] as output and the rule as follow
 
+
+## trashbin
+
+	$$ \begin{equation}(a,b)=\left\{ \begin{aligned}1 \quad a=b\\0 \quad a\neq b\\\end{aligned}\right.\end{equation}
+	$$
+
+	$$
+	\begin{cases}
+	1  a=b \\ 
+	0  a \neq b 
+	\end{cases}
+	$$
+
+	$$ F^{HLLC}=\{ sdf\\sdf$$
+
+	$$ A_{1b} = \left[\begin{array}{ccc} 1 & 0 & 0 \\ -D & 1 & 0 \\ 0 & 0 & 1 \end{array} \right] $$ 
 
     
